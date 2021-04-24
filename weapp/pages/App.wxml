@@ -1,0 +1,38 @@
+
+<view class="my-app">
+  <routerView bind_init="__initComponent"></routerView>
+  <view style=" {{ 'padding-bottom:' + ((custom.bottom - 50 < 0?0:custom.bottom - 50) + \'rpx\') + ';' }}" class="star-info-bottom flex-basic flex-jc-sa flex-ai-c">
+    <view data-wpy-evt="10-0" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c flex-1">
+      <image src="../img/home_high.svg" wx:if="{{ nowBottomTab == 'home' }}" class="sib-item-icon"></image>
+      <image src="../img/home.svg" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'home\' ? 'high' : '' ] }}">首页</label>
+    </view>
+    <view data-wpy-evt="10-1" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c flex-1">
+      <image src="../img/order_high.svg" wx:if="{{ nowBottomTab == 'order' }}" class="sib-item-icon"></image>
+      <image src="../img/order.svg" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'order\' ? 'high' : '' ] }}">订单</label>
+    </view>
+    <view data-wpy-evt="10-2" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c flex-1">
+      <image src="../img/zhuchu_high.svg" wx:if="{{ nowBottomTab == 'zhuchu' }}" class="sib-item-icon"></image>
+      <image src="../img/zhuchu.svg" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'zhuchu\' ? 'high' : '' ] }}">租出</label>
+    </view>
+    <view data-wpy-evt="10-3" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c flex-1">
+      <image src="../img/guihuan _high.svg" wx:if="{{ nowBottomTab == 'guihuan' }}" class="sib-item-icon"></image>
+      <image src="../img/guihuan.svg" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'guihuan\' ? 'high' : '' ] }}">归还</label>
+    </view>
+    <view data-wpy-evt="10-4" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c flex-1">
+      <image src="../img/wode_high.svg" wx:if="{{ nowBottomTab == 'wode' }}" class="sib-item-icon"></image>
+      <image src="../img/wode.svg" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'wode\' ? 'high' : '' ] }}">我的</label>
+    </view>
+  </view>
+  <HourMinute></HourMinute>
+  <yearMonthMate></yearMonthMate>
+  <LoginRegister wx:if="{{ showLogin }}" data-wpy-evt="10-5" bind:closeMask="__dispatcher"></LoginRegister>
+  <choiseStar wx:if="{{ isChangingStar }}" data-wpy-evt="10-6" bind:closeMask="__dispatcher"></choiseStar>
+  
+    <record d="{{ starInfo.d }}" tab="{{ nowTab }}" edit-data="{{ editData }}" wx:if="{{ showRecord }}" data-wpy-evt="10-7" bind:closeRecord="__dispatcher"></record>
+  
+</view>

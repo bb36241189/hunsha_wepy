@@ -1,0 +1,39 @@
+{
+  "name": "radish_wepy",
+  "version": "1.0.4",
+  "description": "A WePY project",
+  "main": "weapp/app.js",
+  "scripts": {
+    "xmy": "webpack --env=xmy",
+    "dev": "./node_modules/.bin/wepy build --watch",
+    "build": "cross-env NODE_ENV=production ./node_modules/.bin/wepy build --no-cache",
+    "clean": "rm -rf weapp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "wepy": {
+    "module-a": false,
+    "./src/components/list": "./src/components/wepy-list.wpy"
+  },
+  "author": "shileyi <msn36241189@msn.cn>",
+  "license": "MIT",
+  "dependencies": {
+    "@wepy/core": "^2.0.0-alpha.16",
+    "miniprogram-slide-view": "0.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@wepy/babel-plugin-import-regenerator": "0.0.2",
+    "@wepy/cli": "^2.0.0-alpha.28",
+    "@wepy/compiler-babel": "^2.0.1",
+    "@wepy/compiler-less": "^2.0.7",
+    "babel-eslint": "^7.2.1",
+    "cross-env": "^5.1.3",
+    "less": "^3.11.1",
+    "postcss-pxtorpx": "^1.0.0",
+    "vue": "^2.4.4",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "wepy-compiler-scss2": "^1.0.3"
+  }
+}

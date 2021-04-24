@@ -1,0 +1,49 @@
+<template>
+    <div class="router-view">
+        <slot></slot>
+        <!-- <component :is="auguryIntro"></component> -->
+        <home class="component" v-if="currentRoute == '/home'"></home>
+    </div>
+</template>
+<style lang="less" type="text/css">
+@import '../style/flex-integrate.less';
+.router-view{
+    height: 100%;
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component({
+    mixins: [testMixin],
+    data: {
+        currentRoute:''
+    },
+    methods: {
+    },
+    watch: {
+        '$route.path'(v){
+            console.log('watch:$router',v);
+            this.currentRoute = v;
+        }
+    },
+    created(){
+        console.log('routerView:created',this.$router);
+        if(this.$route.path){
+            this.currentRoute = this.$route.path;
+        }
+        // if(this.$router.length){
+        //     this.$router.push(this.$router[this.$router.length - 1].path);
+        // }else{
+        //     this.$router.push('/starInfo');
+        // }
+    }
+});
+</script>
+<config>
+{
+    usingComponents: {
+        home: "~@/views/home.wpy"
+    }
+}
+</config>

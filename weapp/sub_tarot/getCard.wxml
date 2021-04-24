@@ -1,0 +1,26 @@
+
+<view class="tarot-app">
+    <bgAnimation externalClasses="{{ 'star-info-bg' }}" class="gcp-bg"></bgAnimation>
+    <view wx:if="{{ isOrdered }}" class="get-card-page">
+        <view style=" {{ 'padding-top:' + ((custom.top + 30) + \'rpx\') + ';' }}"></view>
+        <backBtn></backBtn>
+        
+        <view class="gcp-hint flex-basic flex-jc-c">
+            <label class="gcp-hint-text">{{title_text}}</label>
+        </view>
+        <preadThree prevCard="{{ prevCard }}" nowCard="{{ nowCard }}" nextCard="{{ nextCard }}"></preadThree>
+        <view>
+            <view style="position:relative;" class="gcp-some-info flex-vertical flex-ai-c">
+                <label class="gsi-text1">{{getedNum}}/3</label>
+                <label key="gt1" wx:if="{{ getedNum < 1 }}" class="gsi-text2">过去的情况</label>
+                <label key="gt2" wx:elif="{{ getedNum < 2 }}" class="gsi-text2">现在的情况</label>
+                <label key="gt3" wx:elif="{{ getedNum < 3 }}" class="gsi-text2">未来的情况</label>
+                <label class="gsi-text3">摒弃杂念选出一张卡牌</label>
+            </view>
+            <cardCircle data-wpy-evt="11-0" bind:getedCard="__dispatcher" class="cc-clazz"></cardCircle>
+        </view>
+    </view>
+    <view wx:else class="get-card-page">
+        <image src="https://nqobaxsg.cn/star_tarot/dist/img/universe_bg2.png" class="gcp-bg"></image>
+    </view>
+</view>

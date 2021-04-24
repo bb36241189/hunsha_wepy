@@ -1,0 +1,115 @@
+<template>
+    <div class="home" scroll-y="true" :styled="{paddingTop: (custom.top + 30) + 'rrpx',paddingBottom: (custom.bottom + 114) + 'rrpx'}">
+      <div class="notice-bar flex-basic flex-ai-c">
+        <img src="../img/laba.svg" class="notice-bar-icon" />
+      </div>
+      <div class="home-cover flex-basic flex-jc-c flex-ai-c">
+        <img src="../img/v2_qrt1vn.png" class="home-cover-img" mode="heightFix" />
+      </div>
+      <div class="home-search flex-basic flex-ai-c">
+        <input type="text" class="home-search-input" />
+        <div class="home-search-cancel flex-basic flex-jc-c flex-ai-c">
+          <span class="hsc-text">取消</span>
+        </div>
+      </div>
+    </div>
+</template>
+
+<style lang="less" type="text/css">
+@import "../style/animation.less";
+@import '../style/flex-integrate.less';
+page {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+.home {
+  position: relative;
+  // padding-top: 30rrpx;
+  // padding-bottom: 114rrpx;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: #f6f6f6;
+}
+.notice-bar{
+  padding-left: 32rpx;
+  height: 66rpx;
+  background: #efefef;
+}
+.notice-bar-icon{
+  width: 56rpx;
+  height: 56rpx;
+}
+.home-cover {
+  height: 324rpx;
+  background: white;
+}
+.home-cover-img{
+  height: 100%;
+  width: auto;
+}
+.home-search{
+  height: 108rpx;
+}
+.home-search-input{
+  margin-left: 30rpx;
+  background: white;
+  width: 606rpx;
+  height: 67rpx;
+  border-radius: 10rpx;
+}
+.home-search-cancel {
+  height: 100%;
+  flex: 1;
+}
+.hsc-text {
+  font-size: 30rpx;
+  color: #8182a8;
+}
+</style>
+<script>
+import apiService from "../js/apiService";
+import UrlTool from '../js/lib/urlTool';
+import testMixin from '../mixins/test';
+import CommonEnv from '../js/class/CommonEnv';
+import wepy from '@wepy/core';
+wepy.component( {
+  name: "starInfo",
+  mixins: [testMixin],
+  data:{
+      cards:null,
+      showRecord: false,
+      starTopInfo: null,
+      isWXMiniApp: false,
+      daySign: null,
+      carouselTime: 0,
+      products: null,
+      showGetTarotDaren: false
+  },
+  methods: {
+    
+  },
+  watch: {
+    
+  },
+  computed: {
+    nowTab(){
+      return this.$store.state.nowTab;
+    }
+  },
+  created() {
+      
+  },
+  ready() {
+    
+  }
+});
+</script>
+<config>
+{
+    usingComponents: {
+    }
+}
+</config>

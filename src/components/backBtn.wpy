@@ -1,0 +1,73 @@
+<template>
+    <div class="kmj-back-btnwrapper" :style="{top: (navPaddingTop) + 'rpx'}" @tap="goBack">
+        <img src="../img/white_back_3x.png" v-if="!isBlack" class="kmj-back-btn"/>
+        <img src="../img/black_back_3x.png" v-else class="kmj-back-btn"/>
+    </div>
+</template>
+<style lang="less">
+  @import "../style/flex-integrate.less";
+  .kmj-back-btnwrapper{ 
+      position: fixed;
+      top: 118rpx;
+      left: 38rpx;
+      width: 44rpx;
+      height: 44rpx;
+      z-index: 10;
+  }
+  .kmj-back-btn{
+      width: 44rpx;
+      height: 44rpx;
+  }
+</style>
+<script>
+  import wepy from '@wepy/core'
+  import testMixin from '../mixins/test'
+  wepy.component({
+    props: {
+      isBlack: {
+          type : Boolean
+      }
+    },
+
+    data: {
+        navPaddingTop: 0
+    },
+
+    mixins: [testMixin],
+
+    events: {
+      'index-broadcast': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    },
+
+    watch: {
+      custom:{
+        handler(v){
+          if(v){
+            this.navPaddingTop = v.top + 40;
+          }
+        },
+        deep : true,
+        immediate : true
+      }
+    },
+
+    methods: {
+      goBack(){
+        if(getCurrentPages().length > 1){
+          wx.navigateBack();
+        }else{
+          wx.redirectTo({
+            url: '/pages/App'
+          })
+        }
+      }
+    },
+
+    created(){
+        this.navPaddingTop = this.custom.top + 40;
+    }
+  })
+</script>

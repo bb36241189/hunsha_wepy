@@ -1,0 +1,36 @@
+<template>
+    <web-view :src="nowSrc" bindload="bindload" binderror="binderror"></web-view>
+</template>
+<script>
+import wepy from '@wepy/core';
+wepy.page({
+    data: {
+        nowSrc: ''
+    },
+    watch: {
+        nowSrc(v){
+            if(this.nowSrc.indexOf('https%3A') >= 0){
+                this.nowSrc = decodeURIComponent(this.nowSrc);
+            }
+        }
+    },
+    methods: {
+        bindload(e){
+            console.log('bindload:',e);
+        },
+        binderror(e){
+            console.log('binderror:',e);
+        }
+    },
+    onLoad(options){
+        // console.log('web:onLoad',options);
+        // if(options.url && !this.nowSrc){
+        //     this.nowSrc = decodeURIComponent(options.url);
+        // }
+    },
+    created(){
+        
+    }
+});
+</script>
+

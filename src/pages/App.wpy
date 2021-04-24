@@ -1,0 +1,235 @@
+<template>
+  <div class="my-app">
+    <routerView></routerView>
+    <div class="star-info-bottom flex-basic flex-jc-sa flex-ai-c" :style="{paddingBottom: (custom.bottom - 50 < 0?0:custom.bottom - 50) + 'rpx'}">
+      <div
+        class="sib-item flex-vertical flex-ai-c flex-1"
+        @tap="nowBottomTab = 'home'"
+      >
+        <img
+          src="../img/home_high.svg"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'home'"
+        />
+        <img
+          src="../img/home.svg"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'home' }"
+          >首页</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c flex-1"
+        @tap="nowBottomTab = 'order'"
+      >
+        <img
+          src="../img/order_high.svg"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'order'"
+        />
+        <img src="../img/order.svg" class="sib-item-icon" v-else />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'order' }"
+          >订单</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c flex-1"
+        @tap="nowBottomTab = 'zhuchu'"
+      >
+        <img
+          src="../img/zhuchu_high.svg"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'zhuchu'"
+        />
+        <img
+          src="../img/zhuchu.svg"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'zhuchu' }"
+          >租出</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c flex-1"
+        @tap="nowBottomTab = 'guihuan'"
+      >
+        <img
+          src="../img/guihuan _high.svg"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'guihuan'"
+        />
+        <img
+          src="../img/guihuan.svg"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'guihuan' }"
+          >归还</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c flex-1"
+        @tap="nowBottomTab = 'wode'"
+      >
+        <img
+          src="../img/wode_high.svg"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'wode'"
+        />
+        <img
+          src="../img/wode.svg"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'wode' }"
+          >我的</span
+        >
+      </div>
+    </div>
+    <HourMinute></HourMinute>
+    <yearMonthMate></yearMonthMate>
+    <LoginRegister v-if="showLogin" @closeMask="closeLogin"></LoginRegister>
+    <choiseStar v-if="isChangingStar" @closeMask="closeChoiceStar"></choiseStar>
+    <!-- <transition name="animate__fadeOutDownBig"> -->
+      <record :d="starInfo.d" :tab="nowTab" :edit-data="editData" v-if="showRecord" @closeRecord="closeRecord"></record>
+    <!-- </transition> -->
+  </div>
+</template>
+<style lang="less" type="text/css">
+@import "../style/flex-integrate.less";
+.my-app {
+  height: 100%;
+  overflow: hidden;
+}
+.star-info-bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0rpx;
+  left:0rpx;
+  right:0rpx;
+  bottom:0rpx;
+}
+.star-info-bottom {
+  height: 88rpx;
+  border-top: 2rpx solid #a6a6a6;
+  /* padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom); */
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  background: #f9f9f9;
+}
+.sib-item-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.sib-item-text {
+  font-size: 16rpx;
+  color: #3d3d3d;
+}
+.sib-item-text.high {
+  color: #7647ce;
+}
+.star-write-note{
+  position:absolute;
+  bottom: 133rpx;
+  right: 20rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 39rpx #000000;
+}
+.swn-icon{
+  width: 38rpx;
+  height: 38rpx;
+}
+</style>
+<script>
+import apiService from '../js/apiService'
+import CommonEnv from '../js/class/CommonEnv';
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.page( {
+  mixins: [testMixin],
+  data:{
+    nowBottomTab: "", //Diary,Mine
+    showLogin: false,
+    editData: null,
+    onShareStartTime: 0,
+    isChangingStar: false,
+    showRecord: false
+  },
+  watch: {
+    nowBottomTab(v) {
+      if (v == "home" && this.$route.path != "/home") {
+        this.$router.push({path: "/home"});
+      } else if (v == "order" && this.$route.path != "/order") {
+        this.$router.push({path: "/order"});
+      } else if (v == "zhuchu" && this.$route.path != "/zhuchu") {
+        this.$router.push({path: '/zhuchu'});
+      } else if (v == "guihuan" && this.$route.path != "/guihuan") {
+        this.$router.push({path: '/guihuan'});
+      } else if (v == "wode" && this.$route.path != "/wode") {
+        this.$router.push({path: '/wode'});
+      }
+    },
+    $route(to,from){
+        if(to.path == '/home'){
+            this.nowBottomTab = 'home';
+        }else if(to.path == '/order'){
+            this.nowBottomTab = 'order';
+        }else if(to.path == '/zhuchu'){
+            this.nowBottomTab = 'zhuchu';
+        }else if(to.path == '/guihuan'){
+            this.nowBottomTab = 'guihuan';
+        }else if(to.path == '/wode'){
+            this.nowBottomTab = 'wode';
+        }
+    }
+  },
+  onShareAppMessage: function() {
+    console.log('onShareAppMessage...');
+    this.onShareStartTime = Date.now();
+    return {
+      title: '萝卜星座屋',
+      imageUrl: 'https://nqobaxsg.cn/logo.jpg',
+      desc: '从星座的角度带你看清现状和未来',
+      path: '/pages/App'// 路径，传递参数到指定页面。
+    };
+  },
+  computed: {
+    nowTab(){
+      return this.$store.state.nowTab;
+    }
+  },
+  methods: {
+    goLogin() {
+      this.$store.dispatch('starLoginWxMiniPro');
+    }
+  },
+  onShow() {
+    // this.BUS.$emit('openPickerDate');
+    if(!this.nowBottomTab){
+        this.nowBottomTab = 'home';
+    }
+  },
+  created() {
+    
+  },
+});
+</script>
+<config>
+{
+    usingComponents: {
+      routerView: '~@/router/routerView.wpy'
+    }
+}
+</config>

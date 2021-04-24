@@ -1,0 +1,21 @@
+{
+    "pages": [
+        "pages/App"
+    ],
+    "subpackages": [
+        {
+            "root": "sub_tarot",
+            "pages": [
+                "getCard"
+            ]
+        }
+    ],
+    "window": {
+        "navigationStyle": "custom",
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#1E1D25",
+        "navigationBarTitleText": "宫囍婚纱",
+        "navigationBarTextStyle": "white"
+    },
+    "usingComponents": {}
+}

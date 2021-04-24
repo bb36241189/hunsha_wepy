@@ -1,0 +1,15 @@
+
+<view scroll-y="true" styled="{{ {paddingTop: (custom.top + 30) + 'rrpx',paddingBottom: (custom.bottom + 114) + 'rrpx'} }}" class="home">
+  <view class="notice-bar flex-basic flex-ai-c">
+    <image src="../img/laba.svg" class="notice-bar-icon"></image>
+  </view>
+  <view class="home-cover flex-basic flex-jc-c flex-ai-c">
+    <image src="../img/v2_qrt1vn.png" mode="heightFix" class="home-cover-img"></image>
+  </view>
+  <view class="home-search flex-basic flex-ai-c">
+    <input type="text" class="home-search-input" />
+    <view class="home-search-cancel flex-basic flex-jc-c flex-ai-c">
+      <label class="hsc-text">取消</label>
+    </view>
+  </view>
+</view>

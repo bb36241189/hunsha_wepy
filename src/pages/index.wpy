@@ -1,0 +1,88 @@
+<template>
+  <div class="container index-page flex-vertical flex-ai-s flex-1" style="overflow:hidden" catchtouchmove="noneEnoughPeople">
+    <choiseStar></choiseStar>
+  </div>
+</template>
+<style lang="less">
+@import '../style/flex-integrate.less';
+@import '../style/animation.less';
+page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.index-page {
+  background: rgba(30, 29, 37, 1);
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+
+wepy.page({
+  config: {
+    navigationBarTitleText: 'test'
+  },
+
+  hooks: {
+    // Page 级别 hook, 只对当前 Page 的 setData 生效。
+    'before-setData': function(dirty) {
+      // if (Math.random() < 0.2) {
+      //   console.log('setData canceled');
+      //   return false; // Cancel setData
+      // }
+      dirty.time = +new Date();
+      return dirty;
+    }
+  },
+
+  mixins: [testMixin],
+
+  data: {
+  },
+
+  computed: {},
+
+  watch: {
+    custom: {
+      handler(v) {
+        if (v) {
+          this.navPaddingTop = v.top + 47;
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+
+  onShareAppMessage: function() {
+    return {
+      title: '我刚刚预见了情感。事业。财运迷思~准了准了！你也试试看？',
+      imageUrl:'https://nqobaxsg.cn/logo.jpg',
+      desc: '我刚刚预见了情感。事业。财运迷思~准了准了！你也试试看？',
+      path: '/pages/index' // 路径，传递参数到指定页面。
+    };
+  },
+
+  methods: {
+    noneEnoughPeople() {}
+  },
+
+  onLoad: function(options) {},
+
+  onShow() {},
+
+  onHide() {},
+
+  created() {
+    // this.showQuickLucky = true;
+  }
+});
+</script>
+<config>
+{
+    usingComponents: {
+      'choiseStar': '~@/components/choiseStar.wpy'
+    }
+}
+</config>

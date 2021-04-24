@@ -1,0 +1,6 @@
+
+<view class="router-view">
+    <slot></slot>
+    
+    <home bind_init="__initComponent" wx:if="{{ currentRoute == '/home' }}" class="component"></home>
+</view>
